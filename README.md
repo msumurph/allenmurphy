@@ -1,2 +1,2 @@
-# allenmurphy.github.io
+# allenmurphy
 Testing GitHub Pages.
