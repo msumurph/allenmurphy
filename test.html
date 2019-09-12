@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      body {background: white;}
+      p {color: black;}
+      h1 {font-weight: bold;}
+      #clockbox {
+        font-size: 60px;
+        font-family: sans-serif;
+        color:darkred;
+      }
+    </style>
+    <title>SCVLC</title>    
+  </head>
+  <body>
+    
+    <div id="clockbox"></div>
+
+    <table width="100%">
+      <tr halign="top">
+        <td rowspan="2" halign="top" width="1000px" >
+          <!--- Presentation and Video--->
+          <div id="pres"></div>
+      
+      </td>
+        <!--- Twitter -->
+      <td width="100%"><a class="twitter-timeline" data-height="400" href="https://twitter.com/SwartzCreekVLC?ref_src=twsrc%5Etfw">Tweets by SwartzCreekVLC</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script></td>
+    </tr>
+      <tr><td>
+        <!-- Calendar -->
+        <iframe src="https://calendar.google.com/calendar/embed?src=3voorv38jko1p9hehke1nauub4%40group.calendar.google.com&ctz=America%2FNew_York&mode=AGENDA" style="border: 0" width="400" height="400" frameborder="0" scrolling="no"></iframe>
+        
+        </td></tr>
+    </table>
+    
+    <!-- Weather -->
+    <a class="weatherwidget-io" href="https://forecast7.com/en/42d95n83d83/48473/?unit=us" data-label_1="SWARTZ CREEK" data-label_2="WEATHER" data-theme="original" >SWARTZ CREEK WEATHER</a>
+    
+    <!-- Date and Time Script -->
+    <script>
+      !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src='https://weatherwidget.io/js/widget.min.js';fjs.parentNode.insertBefore(js,fjs);}}(document,'script','weatherwidget-io-js');
+    </script>
+    
+    <script type="text/javascript">
+      var tday=["Sunday","Monday","Tuesday",
+                "Wednesday","Thursday","Friday",
+                "Saturday"];
+      
+      var tmonth=["January","February","March","April",
+                  "May","June","July","August","September",
+                  "October","November","December"];
+
+      function GetClock(){
+        var d=new Date();
+        var nday=d.getDay(),
+            nmonth=d.getMonth(),
+            ndate=d.getDate(),
+            nyear=d.getFullYear();
+        
+        var nhour=d.getHours(),
+            nmin=d.getMinutes(),
+            nsec=d.getSeconds(),
+            ap;
+
+        if(nhour==0){ap=" AM";nhour=12;}
+        else if(nhour<12){ap=" AM";}
+        else if(nhour==12){ap=" PM";}
+        else if(nhour>12){ap=" PM";nhour-=12;}
+
+        if(nmin<=9) nmin="0"+nmin;
+        if(nsec<=9) nsec="0"+nsec;
+
+        var clocktext="SCVLC  "+tday[nday]+", "+tmonth[nmonth]+" "+
+            ndate+", "+nyear+" "+nhour+":"+nmin+":"+nsec+ap+"";
+        document.getElementById('clockbox').innerHTML=clocktext;
+      }
+
+      GetClock();
+      setInterval(GetClock,1000);
+    </script>
+    
+    
+    <!-- Script to show bothe the presentaiton and the video -->
+    <script>
+      // update with the desired time to refresh the presentation (in minutes)
+      
+      var myDiv = document.getElementById("pres");
+      var refreshMinutes = 1.2;
+      var i = 1;
+      
+      var frames = ['<iframe width="1440" height="810" src="https://www.youtube.com/embed/0_hIl9i03Ek?autoplay=1" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>' ,  '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRhsxm_6jNZ4uJs_b0nljyemSb9JyPSeu7pK9Y3_SXS5_bMxU6RuZSSXKOyL4otg6Htn1l7v5Bf6yAl/embed?start=true&loop=true&delayms=10000" frameborder="0" width="1440" height="810" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>'];
+
+      myDiv.innerHTML = frames[i];
+
+      // ***********************************************
+      var refreshFrame = function() {
+        i = (i+1)%2;
+        myDiv.innerHTML = frames[i];
+      }
+
+      // ***********************************************
+      var timer=setInterval(function(){refreshFrame()}, refreshMinutes*60.0*1000);
+      
+    </script>
+    
+  </body>
+</html>
